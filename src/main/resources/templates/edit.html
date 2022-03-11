@@ -5,7 +5,7 @@
     <title>Edit</title>
 </head>
 <body>
-<form th:method="PATCH" th:action="@{/admin/{id} (id=${user.getId()})}" th:object="${user}">
+<form th:method="PATCH" th:action="@{/authenticated/admin/{id} (id=${user.getId()})}" th:object="${user}">
     <label for="username">Enter username:</label>
     <input type="text" name="name" th:field="*{username}" id="username"/>
     <div style="color: red" th:if="${#fields.hasErrors('username')}"></div>

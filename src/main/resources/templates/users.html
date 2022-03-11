@@ -31,10 +31,10 @@
       <td th:text="${user.getUsername()}"/>
       <td th:text="${user.getPassword()}"/>
       <td>
-        <form th:action="@{/admin/{id}/edit (id=${user.getId()})}">
+        <form th:action="@{/authenticated/admin/{id}/edit (id=${user.getId()})}">
           <button type="submit" >EDIT</button>
         </form>
-        <form th:method="DELETE" th:action="@{/admin/{id} (id=${user.getId()})}" >
+        <form th:method="DELETE" th:action="@{/authenticated/admin/{id} (id=${user.getId()})}" >
           <button type="submit" >DELETE</button>
         </form>
       </td>
