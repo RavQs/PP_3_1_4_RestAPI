@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -59,36 +60,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new InMemoryUserDetailsManager(user,admin);
     }
 
-    /*@Bean
-    public JdbcUserDetailsManager users(DataSource dataSource) {
-        //Базовые юзеры в БД
-        UserDetails user =
-                User.builder()
-                        .username("user")
-                        .password(bCryptPasswordEncoder().encode("user"))
-                        .roles("USER")
-                        .build();
-
-        UserDetails admin =
-                User.builder()
-                        .username("admin")
-                        .password(bCryptPasswordEncoder().encode("admin"))
-                        .roles("USER", "ADMIN")
-                        .build();
-
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-
-        if(jdbcUserDetailsManager.userExists(user.getUsername())){
-            jdbcUserDetailsManager.deleteUser(user.getUsername());
-        }
-        if(jdbcUserDetailsManager.userExists(admin.getUsername())){
-            jdbcUserDetailsManager.deleteUser(admin.getUsername());
-        }
-        jdbcUserDetailsManager.createUser(user);
-        jdbcUserDetailsManager.createUser(admin);
-
-        return jdbcUserDetailsManager;
-    }*/
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        final DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(bCryptPasswordEncoder());
+        return authProvider;
+    }
 
 
     @Bean
