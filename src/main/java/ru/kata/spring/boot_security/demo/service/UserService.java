@@ -1,11 +1,13 @@
 package ru.kata.spring.boot_security.demo.service;
 
+import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
 
+@Service
 public interface UserService {
-    List<User> index();
+    List<User> userList();
 
     User findById(long id);
 
@@ -13,5 +15,7 @@ public interface UserService {
 
     void update(long id, User user);
 
-    void delete(long id);
+    void deleteById(long id);
+
+    User findByUsername(String username);
 }
