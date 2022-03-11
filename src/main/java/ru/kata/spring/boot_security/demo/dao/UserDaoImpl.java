@@ -12,30 +12,30 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
 
     @Override
     public void saveUser(User user) {
-        em.persist(user);
+        entityManager.persist(user);
     }
 
     @Override
     public List<User> userList() {
-        TypedQuery<User> query = em.createQuery("select u from User u", User.class);
+        TypedQuery<User> query = entityManager.createQuery("select u from User u", User.class);
 
         return query.getResultList();
     }
 
     @Override
     public User findById(long id) {
-        TypedQuery<User> query = em.createQuery("select u from User u join fetch u.roles where u.id=:id", User.class);
+        TypedQuery<User> query = entityManager.createQuery("select u from User u join fetch u.roles where u.id=:id", User.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }
 
     @Override
     public void deleteById(long id) {
-        em.remove(findById(id));
+        entityManager.remove(findById(id));
     }
 
     @Override
@@ -44,13 +44,14 @@ public class UserDaoImpl implements UserDao {
         userForUpdate.setUsername(userUpdated.getUsername());
         userForUpdate.setPassword(userUpdated.getPassword());
         userForUpdate.setRoles(userUpdated.getRoles());
-        em.merge(userForUpdate);
+        entityManager.merge(userForUpdate);
     }
 
     @Override
     public User findByUsername(String username) {
-        TypedQuery<User> query = em.createQuery("select u from User u join fetch u.roles where u.username=:username", User.class);
+        TypedQuery<User> query = entityManager.createQuery("select u from User u join fetch u.roles where u.username=:username", User.class);
         query.setParameter("username", username);
         return query.getSingleResult();
     }
+
 }

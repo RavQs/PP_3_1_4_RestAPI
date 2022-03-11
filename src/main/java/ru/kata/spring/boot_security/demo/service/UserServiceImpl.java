@@ -3,15 +3,23 @@ package ru.kata.spring.boot_security.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
+import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
+@Transactional
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
+    private final RoleService roleService;
 
-    public UserServiceImpl(UserDao userDao) {
+    @Autowired
+    public UserServiceImpl(UserDao userDao,RoleService roleService) {
+        this.roleService = roleService;
         this.userDao = userDao;
     }
 
@@ -43,5 +51,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
+    }
+
+    @Override
+    public Set<Role> getSetOfRoles(List<String> role_string) {
+        Set<Role> roles = new HashSet<>();
+        for (String roleOfName : role_string) {
+            roles.add(roleService.findByRole(roleOfName));
+        }
+        return roles;
     }
 }

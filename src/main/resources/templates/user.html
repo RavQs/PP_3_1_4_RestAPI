@@ -1,14 +1,50 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <title>Index of pages</title>
+    <style>
+        table {
+            border-width: medium;
+            width: auto; /* Ширина таблицы */
+            background: white; /* Цвет фона таблицы */
+            color: black; /* Цвет текста */
+            border-spacing: 1px; /* Расстояние между ячейками */
+        }
+        td, th {
+            background: gray; /* Цвет фона ячеек */
+            padding: 5px; /* Поля вокруг текста */
+        }
+    </style>
 </head>
-
 <body>
-    <h1>User, welcome spring boot security page!</h1>
-</body>
+
+<table>
+
+    <tr>
+        <th>ID</th>
+        <th>USERNAME</th>
+        <th>PASSWORD</th>
+    </tr>
+    <tr>
+        <td th:text="${userPage.getId()}"></td>
+        <td th:text="${userPage.getUsername()}"></td>
+        <td th:text="${userPage.getPassword()}"></td>
+
+    </tr>
+</table>
 <br/>
-<a th:href="@{/index}">back to main page</a>
+<hr/>
+<form th:action="@{/logout}" th:method="POST">
+    <button type="submit">LOGOUT</button>
+</form>
 
 
+</body>
 </html>

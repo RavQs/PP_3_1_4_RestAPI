@@ -1,12 +1,15 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Collection;
 
-@Entity
 @Data
+@Entity
+@NoArgsConstructor
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
     @Id
@@ -14,6 +17,8 @@ public class Role implements GrantedAuthority {
     private long id;
     @Column
     private String role;
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
 
     @Override
     public String getAuthority() {
