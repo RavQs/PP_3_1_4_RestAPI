@@ -8,7 +8,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -23,13 +27,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/authenticated/**").authenticated()
+                .anyRequest().permitAll()
                 .and()
-                .formLogin().successHandler(successUserHandler)
+                .formLogin()
+                .successHandler(successUserHandler)
                 .permitAll()
                 .and()
-                .logout()
+                .logout().logoutSuccessUrl("/index")
                 .permitAll();
     }
 
@@ -38,12 +43,56 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public UserDetailsService userDetailsService() {
         UserDetails user =
-                User.withDefaultPasswordEncoder()
+                User.builder()
                         .username("user")
-                        .password("user")
+                        .password(bCryptPasswordEncoder().encode("user"))
                         .roles("USER")
                         .build();
 
-        return new InMemoryUserDetailsManager(user);
+        UserDetails admin =
+                User.builder()
+                        .username("admin")
+                        .password(bCryptPasswordEncoder().encode("admin"))
+                        .roles("USER","ADMIN")
+                        .build();
+
+        return new InMemoryUserDetailsManager(user,admin);
+    }
+
+    /*@Bean
+    public JdbcUserDetailsManager users(DataSource dataSource) {
+        //Базовые юзеры в БД
+        UserDetails user =
+                User.builder()
+                        .username("user")
+                        .password(bCryptPasswordEncoder().encode("user"))
+                        .roles("USER")
+                        .build();
+
+        UserDetails admin =
+                User.builder()
+                        .username("admin")
+                        .password(bCryptPasswordEncoder().encode("admin"))
+                        .roles("USER", "ADMIN")
+                        .build();
+
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+        if(jdbcUserDetailsManager.userExists(user.getUsername())){
+            jdbcUserDetailsManager.deleteUser(user.getUsername());
+        }
+        if(jdbcUserDetailsManager.userExists(admin.getUsername())){
+            jdbcUserDetailsManager.deleteUser(admin.getUsername());
+        }
+        jdbcUserDetailsManager.createUser(user);
+        jdbcUserDetailsManager.createUser(admin);
+
+        return jdbcUserDetailsManager;
+    }*/
+
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder(12);
     }
 }
