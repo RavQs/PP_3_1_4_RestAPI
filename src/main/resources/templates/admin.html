@@ -1,22 +1,54 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example</title>
+    <head>
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+              integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+              crossorigin="anonymous">
+
+        <title>Admin Page</title>
+        <style>
+            table {
+                border-width: medium;
+                width: auto;
+                background: white;
+                color: black;
+                border-spacing: 1px;
+            }
+            td, th {
+                padding: 5px;
+            }
+        </style>
+    </head>
 </head>
 <body>
 <h1>Welcome to ADMIN PAGE!</h1>
 <p>Here's some secret info</p>
 <br/>
 <hr/>
-<a th:href="@{/authenticated/admin}">Redact Users</a>
+<table>
+    <tr>
+        <th></th>
+        <th>Info</th>
+        <th></th>
+    </tr>
+    <tbody>
+    <tr>
+        <td><a th:href="@{/authenticated/admin}">Redact Users</a></td>
+        <td><a th:href="@{/index}">back to main page</a></td>
+        <td><a th:href="@{/logout}">time to logout</a></td>
+    </tr>
+    </tbody>
+</table>
+
 <br/>
 <br/>
-<br/>
-<a th:href="@{/index}">back to main page</a>
-<br/>
-<br/>
-<br/>
-<a th:href="@{/logout}">time to logout</a>
 <hr/>
 <a href="https://www.arngren.net/">r u sure u want to click here?</a>
 </body>

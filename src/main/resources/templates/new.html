@@ -8,12 +8,12 @@
 <body>
 <form th:method="POST" th:action="@{createUser}" th:object="${user}">
     <label for="username">Enter Username:</label>
-    <input type="text" name="name" th:field="*{username}" id="username"/>
+    <input type="text" name="name" th:field="*{username}" id="username" required/>
     <div  style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
     <br/>
     <br/>
     <label for="password">Enter Password:</label>
-    <input type="text" name="password" th:field="*{password}" id="password"/>
+    <input type="password" name="password" th:field="*{password}" id="password" required/>
     <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     <br/>
     <br/>
