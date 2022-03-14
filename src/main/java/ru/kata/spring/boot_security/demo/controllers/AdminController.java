@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/authenticated")
 public class AdminController {
 
     private final UserService userService;
@@ -52,7 +51,7 @@ public class AdminController {
             return "new";
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.saveUser(user);
-        return "redirect:/authenticated/admin";
+        return "redirect:/admin";
     }
     @GetMapping("/admin/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
@@ -68,12 +67,12 @@ public class AdminController {
             return "edit";
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.update(id, user);
-        return "redirect:/authenticated/admin";
+        return "redirect:admin";
     }
 
     @DeleteMapping("/admin/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.deleteById(id);
-        return "redirect:/authenticated/admin";
+        return "redirect:/admin";
     }
 }

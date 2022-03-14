@@ -28,7 +28,7 @@
   </tr>
   <div th:each="user:${userList}">
     <tr>
-      <td th:text="${user.getUsername()}"/>
+      <td th:text="${user.getEmail()}"/>
       <td th:text="${user.getPassword()}"/>
       <td>
         <form th:action="@{/authenticated/admin/{id}/edit (id=${user.getId()})}">

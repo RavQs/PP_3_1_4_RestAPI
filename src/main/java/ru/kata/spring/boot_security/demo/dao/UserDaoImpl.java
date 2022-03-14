@@ -41,16 +41,19 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void update(long id, User userUpdated) {
         User userForUpdate = findById(id);
-        userForUpdate.setUsername(userUpdated.getUsername());
+        userForUpdate.setEmail(userUpdated.getEmail());
         userForUpdate.setPassword(userUpdated.getPassword());
+        userForUpdate.setFirstName(userUpdated.getFirstName());
+        userForUpdate.setLastName(userUpdated.getLastName());
+        userForUpdate.setAge(userUpdated.getAge());
         userForUpdate.setRoles(userUpdated.getRoles());
         entityManager.merge(userForUpdate);
     }
 
     @Override
-    public User findByUsername(String username) {
-        TypedQuery<User> query = entityManager.createQuery("select u from User u join fetch u.roles where u.username=:username", User.class);
-        query.setParameter("username", username);
+    public User findByEmail(String email) {
+        TypedQuery<User> query = entityManager.createQuery("select u from User u join fetch u.roles where u.email=:email", User.class);
+        query.setParameter("email", email);
         return query.getSingleResult();
     }
 
