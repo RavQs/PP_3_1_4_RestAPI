@@ -67,7 +67,7 @@ public class AdminController {
             return "edit";
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.update(id, user);
-        return "redirect:admin";
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/admin/{id}")

@@ -22,7 +22,7 @@
 <table {border="1"}>
 
   <tr>
-    <th>USERNAME</th>
+    <th>EMAIL</th>
     <th>PASSWORD</th>
     <th>ACTION</th>
   </tr>
@@ -31,10 +31,10 @@
       <td th:text="${user.getEmail()}"/>
       <td th:text="${user.getPassword()}"/>
       <td>
-        <form th:action="@{/authenticated/admin/{id}/edit (id=${user.getId()})}">
+        <form th:action="@{admin/{id}/edit (id=${user.getId()})}">
           <button type="submit" >EDIT</button>
         </form>
-        <form th:method="DELETE" th:action="@{/authenticated/admin/{id} (id=${user.getId()})}" >
+        <form th:method="DELETE" th:action="@{admin/{id} (id=${user.getId()})}" >
           <button type="submit" >DELETE</button>
         </form>
       </td>
@@ -44,7 +44,7 @@
 </table>
 <br/>
 <hr/>
-<form th:action="@{/authenticated/admin/new}">
+<form th:action="@{admin/new}">
   <button type="submit">Create new User</button>
 </form>
 <form th:action="@{/logout}" th:method="POST">
