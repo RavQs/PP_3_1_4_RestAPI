@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +32,7 @@ public class User implements UserDetails {
     @Column
     private String lastName;
     @Column
+    @Min(1) @Max(150)
     private byte age;
 
     @Override
