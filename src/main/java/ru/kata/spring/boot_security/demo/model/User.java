@@ -32,7 +32,6 @@ public class User implements UserDetails {
     @Column
     private String lastName;
     @Column
-    @Min(1) @Max(150)
     private byte age;
 
     @Override

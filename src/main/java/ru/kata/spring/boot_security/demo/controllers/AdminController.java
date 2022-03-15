@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,6 +41,11 @@ public class AdminController {
         Set<Role> roles = roleService.getRoleList();
         model.addAttribute("allRoles", roles);
         return "new";
+    }
+
+    @GetMapping("/indextest")
+    public String test(){
+        return "indextest";
     }
 
     @PostMapping("/admin/createUser")
