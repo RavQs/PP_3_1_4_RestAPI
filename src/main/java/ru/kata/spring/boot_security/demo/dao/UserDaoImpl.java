@@ -1,5 +1,7 @@
 package ru.kata.spring.boot_security.demo.dao;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.model.User;
 
@@ -13,6 +15,7 @@ public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
     @Override
     public void saveUser(User user) {
@@ -42,7 +45,7 @@ public class UserDaoImpl implements UserDao {
     public void update(long id, User userUpdated) {
         User userForUpdate = findById(id);
         userForUpdate.setEmail(userUpdated.getEmail());
-        userForUpdate.setPassword(userUpdated.getPassword());
+        userForUpdate.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
         userForUpdate.setFirstName(userUpdated.getFirstName());
         userForUpdate.setLastName(userUpdated.getLastName());
         userForUpdate.setAge(userUpdated.getAge());

@@ -10,6 +10,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
@@ -19,13 +20,13 @@ public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
 
-    public AdminController(RoleService roleService,UserService userService) {
+    public AdminController(RoleService roleService, UserService userService) {
         this.roleService = roleService;
         this.userService = userService;
     }
 
     @GetMapping
-    public String adminIndex(){
+    public String adminIndex() {
         return "admin";
     }
 
@@ -44,12 +45,17 @@ public class AdminController {
     }
 
     @GetMapping("/indextest")
-    public String test(){
+    public String test(Model model, Principal principal) {
+        model.addAttribute("userList", userService.userList());
+        model.addAttribute("userName", userService.findByUsername(principal.getName()));
+        model.addAttribute( "userNew",new User());
+        Set<Role> roles = roleService.getRoleList();
+        model.addAttribute("allRoles", roles);
         return "indextest";
     }
 
     @PostMapping("/admin/createUser")
-    public String create(@ModelAttribute("user")User user, BindingResult bindingResult,
+    public String create(@ModelAttribute("user") User user, BindingResult bindingResult,
                          @RequestParam("role_authorities") List<String> role_value) {
         if (bindingResult.hasErrors())
             return "new";
@@ -57,6 +63,7 @@ public class AdminController {
         userService.saveUser(user);
         return "redirect:/admin";
     }
+
     @GetMapping("/admin/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.findById(id));
@@ -65,8 +72,8 @@ public class AdminController {
     }
 
     @PatchMapping("/admin/{id}")
-    public String update(@ModelAttribute("user")User user, BindingResult bindingResult, @PathVariable("id") int id,
-                         @RequestParam ("role_authorities") List<String> role_value) {
+    public String update(@ModelAttribute("user") User user, BindingResult bindingResult, @PathVariable("id") int id,
+                         @RequestParam("role_authorities") List<String> role_value) {
         if (bindingResult.hasErrors())
             return "edit";
         user.setRoles(userService.getSetOfRoles(role_value));
