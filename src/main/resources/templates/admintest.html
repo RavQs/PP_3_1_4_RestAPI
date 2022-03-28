@@ -93,7 +93,6 @@
                 </div>
             </div>
 
-
             <div class="tab-pane container-fluid fade" id="newUser">
                 <div class="row">
                     <div class="col border bg-light">
@@ -102,7 +101,7 @@
                 </div>
                 <div class="row text-center">
                     <div class="col-4"></div>
-                    <div class="col-3 bg-white">
+                    <div class="col-12 bg-white">
                         <br/>
                         <form th:method="POST" th:action="@{/admin/createUser}" th:object="${userNew}">
                             <label for="firstName"><strong>First name</strong></label>
@@ -154,7 +153,7 @@
         </div>
     </div>
 </div>
-</div>
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
