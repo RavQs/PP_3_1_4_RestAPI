@@ -44,14 +44,14 @@ public class AdminController {
         return "new";
     }
 
-    @GetMapping("/indextest")
+    @GetMapping("/admintest")
     public String test(Model model, Principal principal) {
         model.addAttribute("userList", userService.userList());
         model.addAttribute("userName", userService.findByUsername(principal.getName()));
         model.addAttribute( "userNew",new User());
         Set<Role> roles = roleService.getRoleList();
         model.addAttribute("allRoles", roles);
-        return "indextest";
+        return "admintest";
     }
 
     @PostMapping("/admin/createUser")
