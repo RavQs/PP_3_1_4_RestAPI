@@ -61,7 +61,7 @@ public class AdminController {
             return "new";
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.saveUser(user);
-        return "redirect:/admin";
+        return "redirect:/admintest";
     }
 
     @GetMapping("/admin/{id}/edit")
@@ -78,12 +78,12 @@ public class AdminController {
             return "edit";
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.update(id, user);
-        return "redirect:/admin";
+        return "redirect:/admintest";
     }
 
     @DeleteMapping("/admin/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.deleteById(id);
-        return "redirect:/admin";
+        return "redirect:/admintest";
     }
 }
