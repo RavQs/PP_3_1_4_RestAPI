@@ -54,7 +54,7 @@ public class AdminController {
             return "new";
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.saveUser(user);
-        return "redirect:/admintest";
+        return "redirect:/admin";
     }
 
 
