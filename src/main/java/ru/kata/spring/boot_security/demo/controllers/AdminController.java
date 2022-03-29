@@ -27,31 +27,24 @@ public class AdminController {
 
     @GetMapping
     public String adminIndex() {
-        return "admin";
+        return "user";
     }
+
+    @GetMapping("/user")
+    public String getUsers(Model model, Principal principal) {
+        model.addAttribute("userName", userService.findByUsername(principal.getName()));
+        return "user";
+    }
+
 
     @GetMapping("/admin")
-    public String getUsers(Model model) {
-        model.addAttribute("userList", userService.userList());
-        return "users";
-    }
-
-    @GetMapping("admin/new")
-    public String newUser(Model model) {
-        model.addAttribute(new User());
-        Set<Role> roles = roleService.getRoleList();
-        model.addAttribute("allRoles", roles);
-        return "new";
-    }
-
-    @GetMapping("/admintest")
     public String test(Model model, Principal principal) {
         model.addAttribute("userList", userService.userList());
         model.addAttribute("userName", userService.findByUsername(principal.getName()));
         model.addAttribute( "userNew",new User());
         Set<Role> roles = roleService.getRoleList();
         model.addAttribute("allRoles", roles);
-        return "admintest";
+        return "admin";
     }
 
     @PostMapping("/admin/createUser")
@@ -64,12 +57,6 @@ public class AdminController {
         return "redirect:/admintest";
     }
 
-    @GetMapping("/admin/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userService.findById(id));
-        model.addAttribute("allRoles", roleService.getRoleList());
-        return "edit";
-    }
 
     @PatchMapping("/admin/{id}")
     public String update(@ModelAttribute("user") User user, BindingResult bindingResult, @PathVariable("id") int id,
@@ -78,12 +65,12 @@ public class AdminController {
             return "edit";
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.update(id, user);
-        return "redirect:/admintest";
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/admin/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.deleteById(id);
-        return "redirect:/admintest";
+        return "redirect:/admin";
     }
 }
