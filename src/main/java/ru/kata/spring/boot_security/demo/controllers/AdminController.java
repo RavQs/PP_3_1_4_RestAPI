@@ -27,7 +27,7 @@ public class AdminController {
 
     @GetMapping
     public String adminIndex() {
-        return "user";
+        return "redirect:/login";
     }
 
     @GetMapping("/user")
