@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
+@RequestMapping("/simple")
 public class AdminController {
 
     private final UserService userService;
@@ -41,20 +42,19 @@ public class AdminController {
     public String test(Model model, Principal principal) {
         model.addAttribute("userList", userService.userList());
         model.addAttribute("userName", userService.findByUsername(principal.getName()));
-        model.addAttribute( "userNew",new User());
+        model.addAttribute("userNew", new User());
         Set<Role> roles = roleService.getRoleList();
         model.addAttribute("allRoles", roles);
         return "admin";
     }
 
     @PostMapping("/admin/createUser")
-    public String create(@ModelAttribute("user") User user, BindingResult bindingResult,
+    public String create(@ModelAttribute("user") User user,
                          @RequestParam("role_authorities") List<String> role_value) {
-        if (bindingResult.hasErrors())
-            return "new";
+
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.saveUser(user);
-        return "redirect:/admin";
+        return "redirect:/simple/admin";
     }
 
 
@@ -65,12 +65,12 @@ public class AdminController {
             return "edit";
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.update(id, user);
-        return "redirect:/admin";
+        return "redirect:/simple/admin";
     }
 
     @DeleteMapping("/admin/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.deleteById(id);
-        return "redirect:/admin";
+        return "redirect:/simple/admin";
     }
 }

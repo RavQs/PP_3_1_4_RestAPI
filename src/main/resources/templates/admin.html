@@ -24,10 +24,10 @@
     <div class="col-sm-2 bg-white min-vh-100">
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-                <a class="nav-link active" th:href="@{/admin}">Admin</a>
+                <a class="nav-link active" th:href="@{/simple/admin}">Admin</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/user}">User</a>
+                <a class="nav-link" th:href="@{/simple/user}">User</a>
             </li>
         </ul>
     </div>
@@ -96,7 +96,7 @@
                                                     </div>
                                                     <div class="modal-body text-center">
                                                         <form th:method="PATCH"
-                                                              th:action="@{/admin/{id} (id=${user.getId()})}"
+                                                              th:action="@{/simple/admin/{id} (id=${user.getId()})}"
                                                               th:object="${user}">
 
                                                             <label for="id1"><strong>ID</strong></label>
@@ -179,7 +179,7 @@
                                                     </div>
                                                     <div class="modal-body text-center">
                                                         <form th:method="DELETE"
-                                                              th:action="@{/admin/{id} (id=${user.getId()})}"
+                                                              th:action="@{/simple/admin/{id} (id=${user.getId()})}"
                                                               th:object="${user}">
 
                                                             <label for="id2"><strong>ID</strong></label>
@@ -255,7 +255,7 @@
                     <div class="col-12 bg-white">
                         <br/>
                         <form th:method="POST"
-                              th:action="@{/admin/createUser}"
+                              th:action="@{/simple/admin/createUser}"
                               th:object="${userNew}">
 
                             <label for="firstName"><strong>First name</strong></label>
