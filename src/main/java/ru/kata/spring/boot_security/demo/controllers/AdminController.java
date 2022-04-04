@@ -3,7 +3,6 @@ package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -59,10 +58,8 @@ public class AdminController {
 
 
     @PatchMapping("/admin/{id}")
-    public String update(@ModelAttribute("user") User user, BindingResult bindingResult, @PathVariable("id") int id,
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id,
                          @RequestParam("role_authorities") List<String> role_value) {
-        if (bindingResult.hasErrors())
-            return "edit";
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.update(id, user);
         return "redirect:/simple/admin";
