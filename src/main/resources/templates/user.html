@@ -15,7 +15,7 @@
         <a th:text="${userName.getEmail()} + ' with roles:'"></a>
         <a th:each="role : ${userName.getRoles()}" th:text="(${role.role=='ADMIN'}?'ADMIN':
             (${role.role=='USER'}?'USER')) + ' '"></a>
-        <a style="float: right" class="btn btn-dark" href="logout" methods="POST">LOGOUT</a>
+        <a style="float: right" class="btn btn-dark" th:href="@{/logout}" th:method="POST">LOGOUT</a>
         </span>
     </div>
 </nav>
