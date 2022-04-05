@@ -355,8 +355,9 @@
                                             <td th:text="${userName.getEmail()}"></td>
                                             <td th:text="${userName.getAge()}"></td>
                                             <td>
-                                                <div th:each="role : ${userName.getRoles()}" th:text="(${role.role=='ADMIN'}?'ADMIN':
-            (${role.role=='USER'}?'USER'))">
+                                                <div th:each="role : ${userName.getRoles()}"
+                                                     th:text="(${role.role=='ADMIN'}?'ADMIN':
+                                                     (${role.role=='USER'}?'USER'))">
                                                 </div>
                                             </td>
                                         </tr>
