@@ -2,9 +2,7 @@ package ru.kata.spring.boot_security.demo.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -22,10 +20,23 @@ public class AdminRESTController {
 
     @GetMapping("/users")
     public List<User> getUserList() {
-        List<User> allUsers = userService.userList();
-        return allUsers;
+        return userService.userList();
     }
 
-    /*@GetMapping("users/{id}")
-    public User()*/
+    @GetMapping("/users/{id}")
+    public User User(@PathVariable long id) {
+        return userService.findById(id);
+    }
+
+    @PostMapping("/users")
+    public User addNewUser(@RequestBody User user, @RequestParam("roles") List<String> roles) {
+        user.setRoles(userService.getSetOfRoles(roles));
+        return userService.saveUser(user);
+    }
+
+    @PatchMapping("/users/{id}")
+    public User updateNewUser(@PathVariable("id") long id, @RequestBody User user, @RequestParam("roles") List<String> roles) {
+        user.setRoles(userService.getSetOfRoles(roles));
+        return userService.update(id,user);
+    }
 }

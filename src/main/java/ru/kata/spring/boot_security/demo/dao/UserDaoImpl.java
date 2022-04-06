@@ -18,9 +18,10 @@ public class UserDaoImpl implements UserDao {
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
     @Override
-    public void saveUser(User user) {
+    public User saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         entityManager.persist(user);
+        return findByEmail(user.getEmail());
     }
 
     @Override
@@ -43,7 +44,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(long id, User userUpdated) {
+    public User update(long id, User userUpdated) {
         User userForUpdate = findById(id);
         userForUpdate.setEmail(userUpdated.getEmail());
         userForUpdate.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
@@ -52,6 +53,7 @@ public class UserDaoImpl implements UserDao {
         userForUpdate.setAge(userUpdated.getAge());
         userForUpdate.setRoles(userUpdated.getRoles());
         entityManager.merge(userForUpdate);
+        return userForUpdate;
     }
 
     @Override

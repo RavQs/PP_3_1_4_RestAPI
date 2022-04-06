@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao,RoleService roleService) {
+    public UserServiceImpl(UserDao userDao, RoleService roleService) {
         this.roleService = roleService;
         this.userDao = userDao;
     }
@@ -34,13 +34,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User user) {
-        userDao.saveUser(user);
+    public User saveUser(User user) {
+        return userDao.saveUser(user);
     }
 
     @Override
-    public void update(long id, User user) {
-        userDao.update(id,user);
+    public User update(long id, User user) {
+        return userDao.update(id, user);
     }
 
     @Override
