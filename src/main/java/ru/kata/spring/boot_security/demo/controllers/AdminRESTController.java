@@ -11,6 +11,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.net.URL;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,7 @@ import java.util.List;
 public class AdminRESTController {
     private final UserService userService;
     private final RestTemplate restTemplate;
-    //private final String URL = "http://localhost:8080/api/users";
+
 
     @Autowired
     public AdminRESTController(UserService userService, RestTemplate restTemplate) {
@@ -26,12 +27,15 @@ public class AdminRESTController {
         this.restTemplate = restTemplate;
     }
 
-   /* @GetMapping("/users")
-    public List<User> getUserList() {
-        return userService.userList();
-    }*/
+    //UserPage
+    @GetMapping("/user")
+    public User getUserPage(Principal principal) {
+        return ResponseEntity.ok().body(userService.findByUsername(principal.getName())).getBody();
+    }
 
-    @GetMapping("/users")
+
+    //AdminPage
+    @GetMapping("/admin")
     public List<User> getUsersList() {
         return ResponseEntity.ok().body(userService.userList()).getBody();
     }
@@ -47,19 +51,19 @@ public class AdminRESTController {
         return allUsers;
     }*/
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/admin/{id}")
     public User User(@PathVariable long id) {
         return ResponseEntity.ok().body(userService.findById(id)).getBody();
     }
 
-    @PostMapping("/users")
+    @PostMapping("/admin")
     public User addNewUser(@RequestBody User user, @RequestParam("roles") List<String> roles) {
         user.setRoles(userService.getSetOfRoles(roles));
         ResponseEntity.ok().body(userService.saveUser(user)).getBody();
         return userService.saveUser(user);
     }
 
-    @PatchMapping("/users/{id}")
+    @PatchMapping("/admin/{id}")
     public User updateNewUser(@PathVariable("id") long id, @RequestBody User user, @RequestParam("roles") List<String> roles) {
         user.setRoles(userService.getSetOfRoles(roles));
         return ResponseEntity.ok().body(userService.update(id, user)).getBody();
