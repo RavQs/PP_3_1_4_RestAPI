@@ -45,7 +45,7 @@ public class AdminRESTController {
                 });
         List<User> allUsers = responseEntity.getBody();
         return allUsers;
-    }*/ //Не работает, виснет
+    }*/
 
     @GetMapping("/users/{id}")
     public User User(@PathVariable long id) {
