@@ -97,7 +97,7 @@
                                                             </div>
                                                             <div class="modal-body text-center">
                                                                 <form th:method="PATCH"
-                                                                      th:action="@{/simple/admin/{id} (id=${user.getId()})}"
+                                                                      th:action="@{/admin/{id} (id=${user.getId()})}"
                                                                       th:object="${user}">
 
                                                                     <label for="id1"><strong>ID</strong></label>
@@ -185,7 +185,7 @@
                                                             </div>
                                                             <div class="modal-body text-center">
                                                                 <form th:method="DELETE"
-                                                                      th:action="@{/simple/admin/{id} (id=${user.getId()})}"
+                                                                      th:action="@{/admin/{id} (id=${user.getId()})}"
                                                                       th:object="${user}">
 
                                                                     <label for="id2"><strong>ID</strong></label>
@@ -266,7 +266,7 @@
                             <div class="col-12 bg-white">
                                 <br/>
                                 <form th:method="POST"
-                                      th:action="@{/simple/admin/createUser}"
+                                      th:action="@{/admin/createUser}"
                                       th:object="${userNew}">
 
                                     <label for="firstName"><strong>First name</strong></label>

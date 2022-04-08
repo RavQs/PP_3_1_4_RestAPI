@@ -52,7 +52,7 @@ public class AdminController {
 
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.saveUser(user);
-        return "redirect:/simple/admin";
+        return "redirect:/admin";
     }
 
 
@@ -61,12 +61,12 @@ public class AdminController {
                          @RequestParam("role_authorities") List<String> role_value) {
         user.setRoles(userService.getSetOfRoles(role_value));
         userService.update(id, user);
-        return "redirect:/simple/admin";
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/admin/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.deleteById(id);
-        return "redirect:/simple/admin";
+        return "redirect:/admin";
     }
 }
