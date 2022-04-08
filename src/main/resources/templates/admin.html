@@ -11,13 +11,7 @@
 <body>
 <!--Верхняя Навигация -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="bg-dark text-white col-12 py-2">
-        <a th:text="${userName.getEmail()} + ' with roles:'"></a>
-        <a th:each="role : ${userName.getRoles()}" th:text="(${role.role=='ADMIN'}?'ADMIN':
-            (${role.role=='USER'}?'USER')) + ' '"></a>
-        <a style="float: right" class="btn btn-dark" th:href="@{/logout}" th:method="POST">LOGOUT</a>
-        </span>
-    </div>
+    <div class="bg-dark text-white col-12 py-2" id="userHeader"></div>
 </nav>
 
 
@@ -324,7 +318,7 @@
                 </div>
             </div>
             <!--Тут User-->
-            <div  class="tab-pane container-fluid fade" id="UserPage">
+            <div class="tab-pane container-fluid fade" id="UserPage">
                 <!--Панель-->
                 <h1>User information-page</h1>
                 </ul>
@@ -347,7 +341,7 @@
                                         <th>AGE</th>
                                         <th>ROLE</th>
                                     </tr>
-                                    <div >
+                                    <div>
                                         <tr>
                                             <td th:text="${userName.getId()}"></td>
                                             <td th:text="${userName.getFirstName()}"></td>
@@ -381,7 +375,8 @@
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
         crossorigin="anonymous"></script>
 
-</body>
 
-<script src=""></script>
+<script src = "userNav.js"></script>
+
+</body>
 </html>

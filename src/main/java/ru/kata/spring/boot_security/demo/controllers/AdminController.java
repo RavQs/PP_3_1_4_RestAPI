@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/simple")
 public class AdminController {
 
     private final UserService userService;
