@@ -2,29 +2,25 @@ package ru.kata.spring.boot_security.demo.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import java.net.URL;
 import java.security.Principal;
 import java.util.List;
 
 @RestController
+@EnableAutoConfiguration
 @RequestMapping("/api")
 public class AdminRESTController {
     private final UserService userService;
-    private final RestTemplate restTemplate;
 
 
     @Autowired
-    public AdminRESTController(UserService userService, RestTemplate restTemplate) {
+    public AdminRESTController(UserService userService) {
         this.userService = userService;
-        this.restTemplate = restTemplate;
     }
 
     //UserPage
