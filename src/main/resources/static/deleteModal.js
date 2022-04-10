@@ -21,17 +21,24 @@ function deleteModal(id) {
                 '</button>' +
                 '</div>' +
                 '<div class="modal-body text-center" id="modalBody">' +
-                '<label for="firstName"><strong>First name</strong></label>' +
-                '<input class="d-inline-block w-100" type="text" name="firstName" id="d_firstName" ' +
+
+                '<label for="id"><strong>ID</strong></label>' +
+                '<input class="d-inline-block w-100 text-light bg-dark" type="text" name="id" id="d_id" ' +
+                'value="' + user.id + '" readonly/>' +
+
+
+                '<br/><br/><label for="firstName"><strong>First name</strong></label>' +
+                '<input class="d-inline-block w-100 text-light bg-dark" type="text" name="firstName" id="d_firstName" ' +
                 'value="' + user.firstName + '" readonly/>' +
+
                 '<br/><br/><label for="lastName"><strong>Last name</strong></label>' +
-                '<input class="d-inline-block w-100" type="text" name="lastName" ' +
+                '<input class="d-inline-block w-100 text-light bg-dark" type="text" name="lastName" ' +
                 'value="' + user.lastName + '" id="d_lastName" readonly/>' +
                 '<br/><br/><label for="age"><strong>Age</strong></label>' +
-                '<input class="d-inline-block w-100" type="number" name="age" ' +
+                '<input class="d-inline-block w-100 text-light bg-dark" type="number" name="age" ' +
                 'value="' + user.age + '" id="d_age" readonly/>' +
                 '<br/><br/><label for="email"><strong>Email</strong></label>' +
-                '<input class="d-inline-block w-100" type="text" name="email" ' +
+                '<input class="d-inline-block w-100 text-light bg-dark" type="text" name="email" ' +
                 'value="' + user.email + '" id="d_email" readonly/>' +
                 '<br/><br/><strong>Roles</strong><br/>' +
                 '<p>' + role + '</p>' +
