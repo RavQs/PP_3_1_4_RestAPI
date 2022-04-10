@@ -23,7 +23,7 @@ public class AdminRESTController {
         this.userService = userService;
     }
 
-    //UserPage
+
     @GetMapping("/user")
     public User getUserPage(Principal principal) {
         return ResponseEntity.ok().body(userService.findByUsername(principal.getName())).getBody();
