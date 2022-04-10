@@ -342,20 +342,7 @@
                                         <th>ROLE</th>
                                     </tr>
                                     <div>
-                                        <tr>
-                                            <td th:text="${userName.getId()}"></td>
-                                            <td th:text="${userName.getFirstName()}"></td>
-                                            <td th:text="${userName.getLastName()}"></td>
-                                            <td th:text="${userName.getEmail()}"></td>
-                                            <td th:text="${userName.getAge()}"></td>
-                                            <td>
-                                                <div th:each="role : ${userName.getRoles()}"
-                                                     th:text="(${role.role=='ADMIN'}?'ADMIN':
-                                                     (${role.role=='USER'}?'USER'))">
-                                                </div>
-                                            </td>
-                                        </tr>
-
+                                        <tr id="userInfo"></tr>
                                     </div>
                                     </form>
                                 </table>
@@ -376,7 +363,8 @@
         crossorigin="anonymous"></script>
 
 
-<script src = "userNav.js"></script>
+<script src="userNav.js"></script>
+<script src="userInfo.js"></script>
 
 </body>
 </html>

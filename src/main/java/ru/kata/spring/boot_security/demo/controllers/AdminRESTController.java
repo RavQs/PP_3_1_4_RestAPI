@@ -52,6 +52,8 @@ public class AdminRESTController {
         return ResponseEntity.ok().body(userService.findById(id)).getBody();
     }
 
+
+
     @PostMapping("/admin")
     public User addNewUser(@RequestBody User user, @RequestParam("roles") List<String> roles) {
         user.setRoles(userService.getSetOfRoles(roles));
@@ -65,7 +67,7 @@ public class AdminRESTController {
         return ResponseEntity.ok().body(userService.update(id, user)).getBody();
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/admin/{id}")
     public String delete(@PathVariable("id") long id) {
         userService.deleteById(id);
         return "User with id:" + id + " was deleted";
