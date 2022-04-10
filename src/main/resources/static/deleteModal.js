@@ -8,7 +8,7 @@ function deleteModal(id) {
             let role=''
 
             for (let i = 0; i < user.roles.length; i++) {
-                role += ((user.roles[i].role === 'ADMIN') ? 'ADMIN' : (user.roles[i].role === 'USER') ? 'USER' : '') + '\n'
+                role += ((user.roles[i].role === 'ADMIN') ? 'ADMIN' : (user.roles[i].role === 'USER') ? 'USER' : '') + ' '
             }
 
             modal_win = '<div class="modal fade" id="deleteModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
@@ -41,7 +41,9 @@ function deleteModal(id) {
                 '<input class="d-inline-block w-100 text-light bg-dark" type="text" name="email" ' +
                 'value="' + user.email + '" id="d_email" readonly/>' +
                 '<br/><br/><strong>Roles</strong><br/>' +
-                '<p>' + role + '</p>' +
+                '<input class="d-inline-block w-100 text-light bg-dark" type="text" name="email" ' +
+                'value="' + role + '"  readonly/>' +
+
                 '<br/>' +
                 '<br/><div class="modal-footer">' +
                 '<button type="button" class="btn btn-lg mt-3 btn-secondary" data-dismiss="modal">Close' +

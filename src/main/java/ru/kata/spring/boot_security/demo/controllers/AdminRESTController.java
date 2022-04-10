@@ -54,15 +54,15 @@ public class AdminRESTController {
 
 
 
-    @PostMapping("/admin")
-    public User addNewUser(@RequestBody User user, @RequestParam("roles") List<String> roles) {
+    @PostMapping("/newUser")
+    public User addNewUser(@RequestBody User user, @RequestParam("newRole") List<String> roles) {
         user.setRoles(userService.getSetOfRoles(roles));
-        ResponseEntity.ok().body(userService.saveUser(user)).getBody();
-        return userService.saveUser(user);
+        return ResponseEntity.ok().body(userService.saveUser(user)).getBody();
+
     }
 
     @PatchMapping("/admin/{id}")
-    public User updateNewUser(@PathVariable("id") long id, @RequestBody User user, @RequestParam("roles") List<String> roles) {
+    public User updateUser(@PathVariable("id") long id, @RequestBody User user, @RequestParam(name = "role_arr") List<String> roles) {
         user.setRoles(userService.getSetOfRoles(roles));
         return ResponseEntity.ok().body(userService.update(id, user)).getBody();
     }

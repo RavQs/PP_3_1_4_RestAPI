@@ -15,7 +15,7 @@ addUser.addEventListener('submit', (ev => {
         }
     }
 
-    fetch('http://localhost:8080/api/admin?newRole=' + new_Role, {
+    fetch('http://localhost:8080/api/newUser?newRole=' + new_Role, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
