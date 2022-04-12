@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-public class AdminController {
+public class StartController {
 
     @GetMapping
     public String adminIndex() {
