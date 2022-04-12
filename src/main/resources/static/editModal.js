@@ -3,7 +3,7 @@ function editModal(id) {
     let modal_win = ''
     let select_role = `<br/><br/><label for="password"><strong>Password</strong></label>
                      <input class="d-inline-block w-100" type="password" name="password" value=""
-                     id="e_password"/>
+                     id="e_password" readonly onfocus="this.removeAttribute('readonly')"/>
                     <br/><br/><strong>Roles</strong>
                      <select class="d-inline-block w-100" id="e_roles" name="role_authorities" size="2" multiple required>
                         <option value="ADMIN">ADMIN</option>
